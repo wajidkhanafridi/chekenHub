@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'app/css/allll.min.css' %} " />
+
+    <!--Owl Carousel CSS-->
+    <link
+      rel="stylesheet"
+      href="{% static 'app/css/oowl.carousel.min.css' %}"
+    />
+
+    <!--FontAwesome CSS-->
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'app/css/fontawesome.min.css' %}" />
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
+
+    <title>Rent House | {% block title %} {% endblock title %}</title>
+  </head>
+  <body>
+    <!--class="navbar navbar-expand-lg navbar-dark"-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger" id="nav">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="nav-ul">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                id="electronicsDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                HOUSE
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+                <li>
+                  <a class="dropdown-item" href="{% url 'peshawarhouse' %}"
+                    >PESHAWAR HOUSE</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'lahorehouse' %}"
+                    >LAHORE HOUSE</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                id="electronicsDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                ISLAMBAD HOUSE
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+                <li>
+                  <a class="dropdown-item" href="{% url 'shaheentown' %}"
+                    >SHAHEEN TOWN</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'alhramtown' %}"
+                    >ALHRAM TOWN</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                id="fashionDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                VILLAGE TOWN
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
+                <li>
+                  <a class="dropdown-item" href="{% url 'khyberkali' %}"
+                    >KHYBER KALI</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" action="/search">
+            {% csrf_token %}
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search here"
+              aria-label="Search"
+              name="q"
+            />
+            <button class="btn btn-warning" type="submit">Search</button>
+          </form>
+          <div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown mx-2">
+                <a
+                  class="nav-link dropdown-toggle text-white"
+                  href="#"
+                  id="profileDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {{request.user.username|capfirst}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'profile' %}"
+                      >Profile</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'orders' %}"
+                      >Orders</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'passwordchange' %}"
+                      >Change Password</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'logout' %}"
+                      >Logout</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item mx-2">
+                <a href="{% url 'showcart' %}" class="nav-link text-white"
+                  ><span class="badge bg-dark">{{totalitem}}</span> Add Rent
+                  House
+                </a>
+              </li>
+              {% else %}
+              <li class="nav-item mx-2">
+                <a href="{% url 'login' %}" class="nav-link text-white"
+                  >Login</a
+                >
+              </li>
+              <li class="nav-item mx-2">
+                <a
+                  href="{% url 'customerregistration' %}"
+                  class="nav-link text-white"
+                  >Registration</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% block banner_slider %} {% endblock banner_slider %} {% block livesale %}
+    {% endblock livesale %} {% block main-content %} {% endblock main-content %}
+
+    <!-- Start Footer -->
+    <footer class="container-fluid bg-danger text-center p-2 mt-5">
+      <small class="text-white"
+        >Copyright &copy; 2022 || Designed By zubair khan ||
+      </small>
+      <img
+        src="{% static 'app/images/payment.png' %}"
+        alt=""
+        srcset=""
+        class="img-fluid"
+        height="2px"
+      />
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Jquery -->
+    <script src="{% static 'app/js/jquery.js' %}"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="{% static 'app/js/popper.js' %}"></script>
+
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/js/myscript.js' %}"></script>
+  </body>
+</html>
